@@ -108,12 +108,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (binding.btnRegister.getVisibility() == View.VISIBLE) {
                     // ログインモードに切り替え
                     binding.btnRegister.setVisibility(View.GONE);
+                    binding.btnLogin.setVisibility(View.VISIBLE);
                     binding.llAdminSection.setVisibility(View.GONE);
                     binding.btnToggleMode.setText("新規登録");
                     binding.btnGuest.setVisibility(View.VISIBLE);
                 } else {
                     // 登録モードに切り替え
                     binding.btnRegister.setVisibility(View.VISIBLE);
+                    binding.btnLogin.setVisibility(View.GONE);
                     binding.llAdminSection.setVisibility(View.VISIBLE);
                     binding.btnToggleMode.setText("ログイン");
                     binding.btnGuest.setVisibility(View.GONE);
