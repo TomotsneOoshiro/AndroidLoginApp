@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    id 'io.realm.kotlin'
 }
 
 android {
@@ -33,7 +32,6 @@ dependencies {
 
     implementation libs.appcompat
     implementation libs.material
-    implementation libs.realm
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
