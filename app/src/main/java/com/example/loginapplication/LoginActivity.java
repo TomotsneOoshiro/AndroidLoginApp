@@ -20,9 +20,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         
-        // Realmの初期化
-        RealmManager.initRealm(this);
-        
         setupViews();
         
         // 初期フラグメントとしてログインフラグメントを表示

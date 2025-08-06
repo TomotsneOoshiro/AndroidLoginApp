@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.loginapplication.databinding.FragmentLoginBinding;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class LoginFragment extends Fragment {
     
     private FragmentLoginBinding binding;
@@ -29,6 +32,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
         setupViews();
     }
     
@@ -58,6 +62,25 @@ public class LoginFragment extends Fragment {
                 if (personID.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getContext(), "ユーザーIDとパスワードを入力してください", Toast.LENGTH_SHORT).show();
                     return;
+                }
+                
+                // デバッグ用：データベース内の全ユーザーを確認
+                Log.d(TAG, "=== デバッグ情報 ===");
+                Log.d(TAG, "入力されたユーザーID: " + personID);
+                Log.d(TAG, "入力されたパスワード: " + password);
+                
+                Realm realm = Realm.getDefaultInstance();
+                try {
+                    RealmResults<User> allUsers = realm.where(User.class).findAll();
+                    Log.d(TAG, "データベース内の全ユーザー数: " + allUsers.size());
+                    for (User u : allUsers) {
+                        Log.d(TAG, "ユーザー: personID=" + u.getPersonID() + 
+                              ", password=" + u.getPassword() + 
+                              ", userType=" + u.getUserType() + 
+                              ", isDeleted=" + u.isDeleted());
+                    }
+                } finally {
+                    realm.close();
                 }
                 
                 User user = RealmManager.authenticateUser(personID, password);

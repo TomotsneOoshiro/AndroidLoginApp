@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.loginapplication.databinding.FragmentRegisterBinding;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class RegisterFragment extends Fragment {
     
     private FragmentRegisterBinding binding;
@@ -29,6 +32,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
         setupViews();
     }
     
@@ -90,6 +94,27 @@ public class RegisterFragment extends Fragment {
                 if (success) {
                     String userTypeText = userType == 0 ? "管理者" : "一般";
                     Toast.makeText(getContext(), "ユーザー登録が完了しました（" + userTypeText + "）", Toast.LENGTH_SHORT).show();
+                    
+                    // デバッグ用：登録後のデータベース状態を確認
+                    Log.d(TAG, "=== 登録後のデバッグ情報 ===");
+                    Log.d(TAG, "登録したユーザーID: " + personID);
+                    Log.d(TAG, "登録したパスワード: " + password);
+                    Log.d(TAG, "登録したユーザータイプ: " + userType);
+                    
+                    Realm realm = Realm.getDefaultInstance();
+                    try {
+                        RealmResults<User> allUsers = realm.where(User.class).findAll();
+                        Log.d(TAG, "データベース内の全ユーザー数: " + allUsers.size());
+                        for (User u : allUsers) {
+                            Log.d(TAG, "ユーザー: personID=" + u.getPersonID() + 
+                                  ", password=" + u.getPassword() + 
+                                  ", userType=" + u.getUserType() + 
+                                  ", isDeleted=" + u.isDeleted());
+                        }
+                    } finally {
+                        realm.close();
+                    }
+                    
                     clearInputs();
                 } else {
                     Toast.makeText(getContext(), "ユーザー登録に失敗しました", Toast.LENGTH_SHORT).show();

@@ -19,3 +19,16 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Realm specific rules
+-keep class io.realm.** { *; }
+-dontwarn io.realm.**
+
+# Keep your Realm model classes
+-keep class com.example.loginapplication.User { *; }
+-keep class com.example.loginapplication.User$* { *; }
+
+# Keep Realm annotations
+-keep @io.realm.annotations.RealmClass class *
+-keep @io.realm.annotations.PrimaryKey class *
+-keep @io.realm.annotations.Required class *

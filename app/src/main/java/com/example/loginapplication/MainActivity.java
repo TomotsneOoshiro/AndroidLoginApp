@@ -23,9 +23,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         
-        // Realmの初期化（Contextを渡す）
-        RealmManager.initRealm(this);
-        
         // Intentからユーザー情報を取得
         Intent intent = getIntent();
         if (intent != null) {

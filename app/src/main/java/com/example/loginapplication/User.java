@@ -3,7 +3,9 @@ package com.example.loginapplication;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
+import io.realm.annotations.RealmClass;
 
+@RealmClass
 public class User extends RealmObject {
     @PrimaryKey
     @Required
@@ -18,8 +20,23 @@ public class User extends RealmObject {
     
     private boolean isSkipConsent = false;
 
-    // デフォルトコンストラクタ
-    public User() {}
+    // デフォルトコンストラクタ（Realmが必要）
+    public User() {
+        this.personID = "";
+        this.password = "";
+        this.isDeleted = false;
+        this.userType = 1;
+        this.isSkipConsent = false;
+    }
+
+    // パラメータ付きコンストラクタ
+    public User(String personID, String password, int userType) {
+        this.personID = personID;
+        this.password = password;
+        this.userType = userType;
+        this.isDeleted = false;
+        this.isSkipConsent = false;
+    }
 
     // Getter and Setter methods
     public String getPersonID() {
