@@ -15,6 +15,7 @@ public class RealmManager {
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("login_app.realm")
                 .schemaVersion(1)
+                .schema(User.class) // Userクラスをスキーマに追加
                 .build();
         Realm.setDefaultConfiguration(config);
     }

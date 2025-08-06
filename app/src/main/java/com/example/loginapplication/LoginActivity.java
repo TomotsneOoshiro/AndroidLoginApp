@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     binding.btnRegister.setVisibility(View.VISIBLE);
                     binding.btnLogin.setVisibility(View.GONE);
                     binding.llAdminSection.setVisibility(View.VISIBLE);
-                    binding.btnToggleMode.setText("ログイン");
+                    binding.btnToggleMode.setText("戻る");
                     binding.btnGuest.setVisibility(View.GONE);
                 }
             }
